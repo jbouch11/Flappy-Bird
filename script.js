@@ -8,14 +8,21 @@ hole.addEventListener('animationiteration', () => {
     var random = Math.random()*3;
     var top = (random*100)+150;
     hole.style.top = -(top) + "px";
+    counter++;
 });
 setInterval(function(){
     var characterTop = 
     parseInt(window.getComputedStyle(character).getPropertyValue("top"));
     if(jumping==0) {
-    character.style.top = (characterTop+3) + "px";
+        character.style.top = (characterTop+3) + "px";
     }
-    if(characterTop>480){
+    var blockleft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+    var holeTop = parseInt(window.getComputedStyle(hole).getPropertyValue("top"));
+    var characterTop = 
+    parseInt(window.getComputedStyle(character).getPropertyValue("top"));
+    var cTop = -(500-characterTop); 
+    if((characterTop>480)||((blockleft<20)&&(blockleft>-50)&&((cTop<holeTop) || 
+    (cTop>holeTop+130)))){
         alert("Game Over. Score: "+counter);
         character.style.top = 100 + "px";
         counter = 0;
